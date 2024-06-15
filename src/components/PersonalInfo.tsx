@@ -6,7 +6,7 @@ function PersonalInfo() {
   const accordionRef = useRef(null);
 
   useEffect(() => {
-    const accordion = new Accordion(accordionRef.current);
+    const accordion = new Accordion(accordionRef.current!);
 
     return () => {
       // Cleanup if necessary
