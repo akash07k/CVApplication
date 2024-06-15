@@ -30,7 +30,7 @@ function PersonalInfo() {
         id="personal_info"
         className="accordion-panel"
         aria-labelledby="personal_info_accordion"
-        hidden // initially hidden
+        hidden={true} // initially hidden
         role="region"
       >
         <div>
