@@ -1,5 +1,5 @@
 import PersonalInfo from "./components/PersonalInfo";
-import "./App.css";
+import "./styles/App.css";
 
 function App() {
   return (
