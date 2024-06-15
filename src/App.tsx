@@ -1,4 +1,5 @@
 import PersonalInfo from "./components/PersonalInfo";
+import EducationalInfo from "./components/EducationalInfo";
 import "./styles/App.css";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <h1>Resume Builder</h1>
       <PersonalInfo />
+<EducationalInfo />
 
     </>
   )
