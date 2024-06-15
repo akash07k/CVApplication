@@ -105,6 +105,20 @@ function PersonalInfo() {
               </label>
               <input type="date" id="dob" required />
             </p>
+            <p>
+              <label htmlFor="professional_title">
+                Professional Title
+                <span aria-hidden="true">*</span>:
+              </label>
+              <input type="text" id="professional_title" required />
+            </p>
+            <p>
+              <label htmlFor="summary">
+                Summary about yourself
+                <span aria-hidden="true">*</span>:
+              </label>
+              <textarea id="summary" required></textarea>
+            </p>
           </fieldset>
           <p>
             <button
