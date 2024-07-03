@@ -17,22 +17,40 @@ function App() {
     country: "",
     dob: "",
     professional_title: "",
-    summary: ""
+    summary: "",
   });
 
-  const handleFormDataChange = (newFormData) => {
+  interface FormData {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone: string;
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+    country: string;
+    dob: string;
+    professional_title: string;
+    summary: string;
+  }
+
+  const handleFormDataChange = (newFormData: FormData) => {
     setFormData(newFormData);
   };
 
   return (
     <>
       <h1>Resume Builder</h1>
-      <PersonalInfo formData={formData} onFormDataChange={handleFormDataChange} />
+      <PersonalInfo
+        formData={formData}
+        onFormDataChange={handleFormDataChange}
+      />
       <EducationalInfo />
       <WorkExperience />
       <pre>{JSON.stringify(formData, null, 2)}</pre>
     </>
-  )
+  );
 }
 
 export default App;
