@@ -2,10 +2,11 @@ import { useState } from "react";
 import PersonalInfo from "./components/PersonalInfo";
 import EducationalInfo from "./components/EducationalInfo";
 import WorkExperience from "./components/WorkExperience";
+import { FormData } from "./types";
 import "./styles/App.css";
 
 function App() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     first_name: "Akash",
     last_name: "Kakkar",
     email: "",
@@ -20,23 +21,11 @@ function App() {
     summary: "",
   });
 
-  interface FormData {
-    first_name: string;
-    last_name: string;
-    email: string;
-    phone: string;
-    address: string;
-    city: string;
-    state: string;
-    zip: string;
-    country: string;
-    dob: string;
-    professional_title: string;
-    summary: string;
-  }
-
-  const handleFormDataChange = (newFormData: FormData) => {
-    setFormData(newFormData);
+  const handleFormDataChange = (newFormData: Partial<FormData>) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      ...newFormData,
+    }));
   };
 
   return (
