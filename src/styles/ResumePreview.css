@@ -1,0 +1,20 @@
+.resume-preview {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #f9f9f9;
+}
+
+.resume-preview section {
+  margin-bottom: 20px;
+}
+
+.resume-preview h3 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.resume-preview p {
+  margin: 5px 0;
+}

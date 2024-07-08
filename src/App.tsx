@@ -2,6 +2,8 @@ import { useState } from "react";
 import PersonalInfo from "./components/PersonalInfo";
 import EducationalInfo from "./components/EducationalInfo";
 import WorkExperience from "./components/WorkExperience";
+import ResumePreview from "./components/ResumePreview";
+import ExportResume from "./components/ExportResume";
 import {
   EducationalInfoData,
   FormData,
@@ -80,7 +82,8 @@ function App() {
           handleFormDataChange("workExperience", newData)
         }
       />
-      <pre>{JSON.stringify(formData, null, 2)}</pre>
+      <ResumePreview resumeData={formData} />
+      <ExportResume resumeData={formData} />
     </>
   );
 }
