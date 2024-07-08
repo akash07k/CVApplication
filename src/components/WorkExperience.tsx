@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import Accordion from "./Accordion";
-import { FormData } from "../types";
+import { WorkExperienceData } from "../types";
 import "../styles/Accordion.css";
 
 interface WorkExperienceProps {
-  formData: FormData;
-  onFormDataChange: (newFormData: Partial<FormData>) => void;
+  formData: WorkExperienceData;
+  onFormDataChange: (newFormData: Partial<WorkExperienceData>) => void;
 }
 
 const WorkExperience = ({
@@ -23,6 +23,7 @@ const WorkExperience = ({
   };
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const accordion = new Accordion(accordionRef.current!);
 
     return () => {
@@ -93,7 +94,7 @@ const WorkExperience = ({
                   <textarea
                     id={id}
                     required={required}
-                    value={formData[id as keyof FormData]}
+                    value={formData[id as keyof WorkExperienceData]}
                     onChange={handleInputValueChange}
                   ></textarea>
                 ) : (
@@ -101,7 +102,7 @@ const WorkExperience = ({
                     type={type}
                     id={id}
                     required={required}
-                    value={formData[id as keyof FormData]}
+                    value={formData[id as keyof WorkExperienceData]}
                     onChange={handleInputValueChange}
                   />
                 )}

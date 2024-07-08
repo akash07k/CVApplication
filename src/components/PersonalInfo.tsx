@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import Accordion from "./Accordion";
-import { FormData } from "../types";
+import { PersonalInfoData } from "../types";
+
 import "../styles/Accordion.css";
 
 interface PersonalInfoProps {
-  formData: FormData;
-  onFormDataChange: (newFormData: Partial<FormData>) => void;
+  formData: PersonalInfoData;
+  onFormDataChange: (newFormData: Partial<PersonalInfoData>) => void;
 }
 
 const PersonalInfo = ({ formData, onFormDataChange }: PersonalInfoProps) => {
@@ -20,6 +21,7 @@ const PersonalInfo = ({ formData, onFormDataChange }: PersonalInfoProps) => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const accordion = new Accordion(accordionRef.current!);
 
     return () => {
@@ -97,7 +99,7 @@ const PersonalInfo = ({ formData, onFormDataChange }: PersonalInfoProps) => {
                   <textarea
                     id={id}
                     required={required}
-                    value={formData[id as keyof FormData]}
+                    value={formData[id as keyof PersonalInfoData]}
                     onChange={handleInputValueChange}
                   ></textarea>
                 ) : (
@@ -105,7 +107,7 @@ const PersonalInfo = ({ formData, onFormDataChange }: PersonalInfoProps) => {
                     type={type}
                     id={id}
                     required={required}
-                    value={formData[id as keyof FormData]}
+                    value={formData[id as keyof PersonalInfoData]}
                     onChange={handleInputValueChange}
                   />
                 )}
