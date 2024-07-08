@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import Accordion from "./Accordion";
+//import Accordion from "./Accordion";
 import { EducationalInfoData } from "../types";
 import "../styles/Accordion.css";
 
@@ -24,7 +24,7 @@ const EducationalInfo = ({
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const accordion = new Accordion(accordionRef.current!);
+    // const accordion = new Accordion(accordionRef.current!);
 
     return () => {
       // Cleanup if necessary
