@@ -50,27 +50,44 @@ const PersonalInfo = ({ formData, onFormDataChange }: PersonalInfoProps) => {
         <div>
           <fieldset>
             {[
-              { label: "First Name", type: "text", id: "first_name" },
-              { label: "Last Name", type: "text", id: "last_name" },
-              { label: "Email", type: "email", id: "email" },
-              { label: "Phone", type: "tel", id: "phone" },
-              { label: "Address", type: "text", id: "address" },
-              { label: "City", type: "text", id: "city" },
-              { label: "State", type: "text", id: "state" },
-              { label: "Zip", type: "text", id: "zip" },
-              { label: "Country", type: "text", id: "country" },
-              { label: "Date of Birth", type: "date", id: "dob" },
+              {
+                label: "First Name",
+                type: "text",
+                id: "first_name",
+                required: true,
+              },
+              {
+                label: "Last Name",
+                type: "text",
+                id: "last_name",
+                required: true,
+              },
+              { label: "Email", type: "email", id: "email", required: true },
+              { label: "Phone", type: "tel", id: "phone", required: true },
+              { label: "Address", type: "text", id: "address", required: true },
+              { label: "City", type: "text", id: "city", required: true },
+              { label: "State", type: "text", id: "state", required: true },
+              { label: "Zip", type: "text", id: "zip", required: true },
+              { label: "Country", type: "text", id: "country", required: true },
+              {
+                label: "Date of Birth",
+                type: "date",
+                id: "dob",
+                required: true,
+              },
               {
                 label: "Professional Title",
                 type: "text",
                 id: "professional_title",
+                required: false,
               },
               {
                 label: "Summary about yourself",
                 type: "textarea",
                 id: "summary",
+                required: false,
               },
-            ].map(({ label, type, id }) => (
+            ].map(({ label, type, id, required }) => (
               <p key={id}>
                 <label htmlFor={id}>
                   {label}
@@ -79,7 +96,7 @@ const PersonalInfo = ({ formData, onFormDataChange }: PersonalInfoProps) => {
                 {type === "textarea" ? (
                   <textarea
                     id={id}
-                    required
+                    required={required}
                     value={formData[id as keyof FormData]}
                     onChange={handleInputValueChange}
                   ></textarea>
@@ -87,7 +104,7 @@ const PersonalInfo = ({ formData, onFormDataChange }: PersonalInfoProps) => {
                   <input
                     type={type}
                     id={id}
-                    required
+                    required={required}
                     value={formData[id as keyof FormData]}
                     onChange={handleInputValueChange}
                   />

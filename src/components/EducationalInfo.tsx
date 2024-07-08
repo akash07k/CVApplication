@@ -57,16 +57,33 @@ const EducationalInfo = ({
                 label: "University/Institution",
                 type: "text",
                 id: "university_institution",
+                required: true,
               },
               {
                 label: "Degree/Program/Course",
                 type: "text",
                 id: "degree_program_course",
+                required: true,
               },
-              { label: "Start Date", type: "date", id: "start_date" },
-              { label: "End Date", type: "date", id: "end_date" },
-              { label: "Percentage/CGPA", type: "text", id: "percentage_cgpa" },
-            ].map(({ label, type, id }) => (
+              {
+                label: "Start Date",
+                type: "date",
+                id: "start_date",
+                required: true,
+              },
+              {
+                label: "End Date",
+                type: "date",
+                id: "end_date",
+                required: true,
+              },
+              {
+                label: "Percentage/CGPA",
+                type: "text",
+                id: "percentage_cgpa",
+                required: true,
+              },
+            ].map(({ label, type, id, required }) => (
               <p key={id}>
                 <label htmlFor={id}>
                   {label}
@@ -75,7 +92,7 @@ const EducationalInfo = ({
                 {type === "textarea" ? (
                   <textarea
                     id={id}
-                    required
+                    required={required}
                     value={formData[id as keyof FormData]}
                     onChange={handleInputValueChange}
                   ></textarea>
@@ -83,7 +100,7 @@ const EducationalInfo = ({
                   <input
                     type={type}
                     id={id}
-                    required
+                    required={required}
                     value={formData[id as keyof FormData]}
                     onChange={handleInputValueChange}
                   />

@@ -53,16 +53,37 @@ const WorkExperience = ({
         <div>
           <fieldset>
             {[
-              { label: "Company Name", type: "text", id: "company_name" },
-              { label: "Job Title", type: "text", id: "job_title" },
+              {
+                label: "Company Name",
+                type: "text",
+                id: "company_name",
+                required: true,
+              },
+              {
+                label: "Job Title",
+                type: "text",
+                id: "job_title",
+                required: true,
+              },
               {
                 label: "Job Description",
                 type: "textarea",
                 id: "job_description",
+                required: true,
               },
-              { label: "Start Date", type: "date", id: "work_start_date" },
-              { label: "End Date", type: "date", id: "work_end_date" },
-            ].map(({ label, type, id }) => (
+              {
+                label: "Start Date",
+                type: "date",
+                id: "work_start_date",
+                required: true,
+              },
+              {
+                label: "End Date",
+                type: "date",
+                id: "work_end_date",
+                required: true,
+              },
+            ].map(({ label, type, id, required }) => (
               <p key={id}>
                 <label htmlFor={id}>
                   {label}
@@ -71,7 +92,7 @@ const WorkExperience = ({
                 {type === "textarea" ? (
                   <textarea
                     id={id}
-                    required
+                    required={required}
                     value={formData[id as keyof FormData]}
                     onChange={handleInputValueChange}
                   ></textarea>
@@ -79,7 +100,7 @@ const WorkExperience = ({
                   <input
                     type={type}
                     id={id}
-                    required
+                    required={required}
                     value={formData[id as keyof FormData]}
                     onChange={handleInputValueChange}
                   />
