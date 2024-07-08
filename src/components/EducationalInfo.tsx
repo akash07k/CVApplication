@@ -1,9 +1,26 @@
 import React, { useEffect, useRef } from "react";
 import Accordion from "./Accordion";
+import { FormData } from "../types";
 import "../styles/Accordion.css";
 
-function EducationalInfo() {
-  const accordionRef = useRef(null);
+interface EducationalInfoProps {
+  formData: FormData;
+  onFormDataChange: (newFormData: Partial<FormData>) => void;
+}
+
+const EducationalInfo = ({
+  formData,
+  onFormDataChange,
+}: EducationalInfoProps) => {
+  const accordionRef = useRef<HTMLHeadingElement>(null);
+
+  const handleInputValueChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = event.target;
+    console.log(`ID: ${id}, Value: ${value}`);
+    onFormDataChange({ [id]: value });
+  };
 
   useEffect(() => {
     const accordion = new Accordion(accordionRef.current!);
@@ -35,41 +52,44 @@ function EducationalInfo() {
       >
         <div>
           <fieldset>
-            <p>
-              <label htmlFor="university_institution">
-                University/Institution/Organization
-                <span aria-hidden="true">*</span>:
-              </label>
-              <input type="text" id="university_institution" required />
-            </p>
-            <p>
-              <label htmlFor="degree_program_course">
-                Degree/Program/Course
-                <span aria-hidden="true">*</span>:
-              </label>
-              <input type="text" id="degree_program_course" required />
-            </p>
-            <p>
-              <label htmlFor="start_date">
-                Start Date
-                <span aria-hidden="true">*</span>:
-              </label>
-              <input type="date" id="start_date" required />
-            </p>
-            <p>
-              <label htmlFor="end_date">
-                End Date
-                <span aria-hidden="true">*</span>:
-              </label>
-              <input type="date" id="end_date" required />
-            </p>
-            <p>
-              <label htmlFor="percentage_cgpa">
-                Percentage/CGPA
-                <span aria-hidden="true">*</span>:
-              </label>
-              <input type="text" id="percentage_cgpa" required />
-            </p>
+            {[
+              {
+                label: "University/Institution",
+                type: "text",
+                id: "university_institution",
+              },
+              {
+                label: "Degree/Program/Course",
+                type: "text",
+                id: "degree_program_course",
+              },
+              { label: "Start Date", type: "date", id: "start_date" },
+              { label: "End Date", type: "date", id: "end_date" },
+              { label: "Percentage/CGPA", type: "text", id: "percentage_cgpa" },
+            ].map(({ label, type, id }) => (
+              <p key={id}>
+                <label htmlFor={id}>
+                  {label}
+                  <span aria-hidden="true">*</span>:
+                </label>
+                {type === "textarea" ? (
+                  <textarea
+                    id={id}
+                    required
+                    value={formData[id as keyof FormData]}
+                    onChange={handleInputValueChange}
+                  ></textarea>
+                ) : (
+                  <input
+                    type={type}
+                    id={id}
+                    required
+                    value={formData[id as keyof FormData]}
+                    onChange={handleInputValueChange}
+                  />
+                )}
+              </p>
+            ))}
           </fieldset>
           <p>
             <button
@@ -84,6 +104,6 @@ function EducationalInfo() {
       </div>
     </>
   );
-}
+};
 
 export default EducationalInfo;

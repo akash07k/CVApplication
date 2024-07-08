@@ -1,89 +1,105 @@
 import React, { useEffect, useRef } from "react";
 import Accordion from "./Accordion";
+import { FormData } from "../types";
 import "../styles/Accordion.css";
 
-function WorkExperience() {
-    const accordionRef = useRef(null);
-
-    useEffect(() => {
-        const accordion = new Accordion(accordionRef.current!);
-
-        return () => {
-            // Cleanup if necessary
-        };
-    }, []);
-
-    return (
-        <>
-            <h2 ref={accordionRef}>
-                <button
-                    type="button"
-                    aria-expanded="false"
-                    className="accordion-trigger"
-                    aria-controls="work_experience"
-                    id="work_experience_accordion"
-                >
-                    <span className="accordion-title">Work Experience</span>
-                </button>
-            </h2>
-            <div
-                id="work_experience"
-                className="accordion-panel"
-                aria-labelledby="work_experience_accordion"
-                hidden={true} // initially hidden
-                role="region"
-            >
-                <div>
-                    <fieldset>
-                        <p>
-                            <label htmlFor="company_name">
-                                Company Name
-                                <span aria-hidden="true">*</span>:
-                            </label>
-                            <input type="text" id="company_name" required />
-                        </p>
-                        <p>
-                            <label htmlFor="job_title">
-                                Job Title
-                                <span aria-hidden="true">*</span>:
-                            </label>
-                            <input type="text" id="job_title" required />
-                        </p>
-                        <p>
-                            <label htmlFor="start_date">
-                                Start Date
-                                <span aria-hidden="true">*</span>:
-                            </label>
-                            <input type="date" id="start_date" required />
-                        </p>
-                        <p>
-                            <label htmlFor="end_date">
-                                End Date
-                                <span aria-hidden="true">*</span>:
-                            </label>
-                            <input type="date" id="end_date" required />
-                        </p>
-                        <p>
-                            <label htmlFor="job_description">
-                                Job Description
-                                <span aria-hidden="true">*</span>:
-                            </label>
-                            <textarea id="job_description" required></textarea>
-                        </p>
-                    </fieldset>
-                    <p>
-                        <button
-                            type="button"
-                            id="Save"
-                            aria-describedby="work_experience_accordion"
-                        >
-                            Save
-                        </button>
-                    </p>
-                </div>
-            </div>
-        </>
-    );
+interface WorkExperienceProps {
+  formData: FormData;
+  onFormDataChange: (newFormData: Partial<FormData>) => void;
 }
+
+const WorkExperience = ({
+  formData,
+  onFormDataChange,
+}: WorkExperienceProps) => {
+  const accordionRef = useRef<HTMLHeadingElement>(null);
+
+  const handleInputValueChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = event.target;
+    console.log(`ID: ${id}, Value: ${value}`);
+    onFormDataChange({ [id]: value });
+  };
+
+  useEffect(() => {
+    const accordion = new Accordion(accordionRef.current!);
+
+    return () => {
+      // Cleanup if necessary
+    };
+  }, []);
+
+  return (
+    <>
+      <h2 ref={accordionRef}>
+        <button
+          type="button"
+          aria-expanded="false"
+          className="accordion-trigger"
+          aria-controls="work_experience"
+          id="work_experience_accordion"
+        >
+          <span className="accordion-title">Work Experience</span>
+        </button>
+      </h2>
+      <div
+        id="work_experience"
+        className="accordion-panel"
+        aria-labelledby="work_experience_accordion"
+        hidden={true} // initially hidden
+        role="region"
+      >
+        <div>
+          <fieldset>
+            {[
+              { label: "Company Name", type: "text", id: "company_name" },
+              { label: "Job Title", type: "text", id: "job_title" },
+              {
+                label: "Job Description",
+                type: "textarea",
+                id: "job_description",
+              },
+              { label: "Start Date", type: "date", id: "work_start_date" },
+              { label: "End Date", type: "date", id: "work_end_date" },
+            ].map(({ label, type, id }) => (
+              <p key={id}>
+                <label htmlFor={id}>
+                  {label}
+                  <span aria-hidden="true">*</span>:
+                </label>
+                {type === "textarea" ? (
+                  <textarea
+                    id={id}
+                    required
+                    value={formData[id as keyof FormData]}
+                    onChange={handleInputValueChange}
+                  ></textarea>
+                ) : (
+                  <input
+                    type={type}
+                    id={id}
+                    required
+                    value={formData[id as keyof FormData]}
+                    onChange={handleInputValueChange}
+                  />
+                )}
+              </p>
+            ))}
+          </fieldset>
+          <p>
+            <button
+              type="button"
+              id="Save"
+              aria-describedby="work_experience_accordion"
+            >
+              Save
+            </button>
+          </p>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default WorkExperience;

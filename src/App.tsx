@@ -19,6 +19,16 @@ function App() {
     dob: "",
     professional_title: "",
     summary: "",
+    university_institution: "",
+    degree_program_course: "",
+    start_date: "",
+    end_date: "",
+    percentage_cgpa: "",
+    company_name: "",
+    job_title: "",
+    job_description: "",
+    work_start_date: "",
+    work_end_date: "",
   });
 
   const handleFormDataChange = (newFormData: Partial<FormData>) => {
@@ -35,8 +45,14 @@ function App() {
         formData={formData}
         onFormDataChange={handleFormDataChange}
       />
-      <EducationalInfo />
-      <WorkExperience />
+      <EducationalInfo
+        formData={formData}
+        onFormDataChange={handleFormDataChange}
+      />
+      <WorkExperience
+        formData={formData}
+        onFormDataChange={handleFormDataChange}
+      />
       <pre>{JSON.stringify(formData, null, 2)}</pre>
     </>
   );
